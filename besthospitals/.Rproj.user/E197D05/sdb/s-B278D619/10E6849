@@ -1,0 +1,18 @@
+{
+    "contents" : "best <- function(x,y) {\n  # best <- function(x = state, y = outcome) {\n  ## Read outcome data\n  outcome <- read.csv(\"outcome-of-care-measures.csv\", colClasses = \"character\")\n  lista = c('heart attack','heart failure','pneumonia')\n  ## Check that state and outcome are valid\n  if(x %in% outcome[,7] == FALSE){\n    stop('invalid state')\n  }\n  if(y %in% lista == FALSE){\n    stop('invalid outcome')\n  }\n  if(y == 'heart attack'){\n        r=11\n        # heart attack = [,11]\n  }\n  if(y == 'heart failure'){\n    r=17\n    # heart failure = [,17]\n  }\n  if(y == 'pneumonia'){\n    r=23\n    # pneumonia = [,23]\n  }\n  ## Return hospital name in that state with lowest 30-day death\n  ## rate\n  rank=outcome[outcome$State == x,]\n  rank[,r]=gsub(\"Not Available\",NA, rank[,r])\n  rank[,r]=as.numeric(as.character(rank[,r]))\n  p=which.min(rank[,r])\n  rank[p,2]\n}",
+    "created" : 1448305882343.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "148631863",
+    "id" : "10E6849",
+    "lastKnownWriteTime" : 1448310361,
+    "path" : "C:/Users/Marcelo/Downloads/BestHospitals/besthospitals/best.R",
+    "project_path" : "best.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
