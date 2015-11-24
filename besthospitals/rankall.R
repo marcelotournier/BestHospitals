@@ -1,26 +1,23 @@
 rankall <- function(y, num = "best") {
   outcome <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
   lista = c('heart attack','heart failure','pneumonia')
-  states=unique(rank$State)
+  states=unique(outcome$State)
   ## Check that state and outcome are valid
   if(y %in% lista == FALSE){
     stop('invalid outcome')
-  }
-  if(y == 'heart attack'){
+  } else if(y == 'heart attack'){
     r=11
     # heart attack = [,11]
-  }
-  if(y == 'heart failure'){
+  } else if(y == 'heart failure'){
     r=17
     # heart failure = [,17]
-  }
-  if(y == 'pneumonia'){
+  } else if(y == 'pneumonia'){
     r=23
     # pneumonia = [,23]
   }
   outcome[,r]=gsub("Not Available",NA, outcome[,r])
   outcome[,r]=as.numeric(as.character(outcome[,r]))
-  rank=outcome[ order(outcome[,r], outcome[,2]), ]
+  rank=outcome[ order(outcome[,r], outcome[,2], na.last = NA), ]
   hospital=c("hospital","state")
   state=c(0,0)
   dat=data.frame(hospital,state)

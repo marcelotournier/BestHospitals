@@ -23,7 +23,7 @@ rankhospital <- function(x,y,num="best") {
   rank=outcome[outcome$State == x,]
   rank[,r]=gsub("Not Available",NA, rank[,r])
   rank[,r]=as.numeric(as.character(rank[,r]))
-  ord=rank[ order(rank[,r], rank[,2]), ]
+  ord=rank[ order(rank[,r], rank[,2], na.last = NA), ]
   if(num == "best"){
     head(ord[,2],1)
     } else if(num == "worst"){
@@ -34,3 +34,7 @@ rankhospital <- function(x,y,num="best") {
   }
 ## Return hospital name in that state with the given rank
 ## 30-day death rate
+#Selection: 4
+#Running test:
+ # rankhospital("NC", "heart attack", "worst")
+# Result:  Incorrect!
